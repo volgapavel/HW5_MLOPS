@@ -2,8 +2,8 @@
 
 import os
 from airflow import DAG
-from airflow.providers.standard.operators.python import PythonOperator
-from airflow.providers.smtp.operators.smtp import EmailOperator
+from airflow.operators.python import PythonOperator
+from airflow.operators.email import EmailOperator
 from datetime import datetime
 
 MODEL_VERSION = os.getenv("MODEL_VERSION", "v1.0.0")

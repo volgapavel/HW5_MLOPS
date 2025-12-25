@@ -1,0 +1,113 @@
+[2025-12-24T16:42:20.728+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-12-24T16:42:20.751+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ml_retrain_pipeline.notify_success manual__2025-12-24T16:42:16.535278+00:00 [queued]>
+[2025-12-24T16:42:20.762+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ml_retrain_pipeline.notify_success manual__2025-12-24T16:42:16.535278+00:00 [queued]>
+[2025-12-24T16:42:20.763+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2025-12-24T16:42:20.777+0000] {taskinstance.py:2889} INFO - Executing <Task(EmailOperator): notify_success> on 2025-12-24 16:42:16.535278+00:00
+[2025-12-24T16:42:20.790+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'ml_retrain_pipeline', 'notify_success', 'manual__2025-12-24T16:42:16.535278+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/ml_retrain_pipeline.py', '--cfg-path', '/tmp/tmpiahshltl']
+[2025-12-24T16:42:20.793+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask notify_success
+[2025-12-24T16:42:20.794+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=325) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-24T16:42:20.795+0000] {standard_task_runner.py:72} INFO - Started process 326 to run task
+[2025-12-24T16:42:20.850+0000] {task_command.py:467} INFO - Running <TaskInstance: ml_retrain_pipeline.notify_success manual__2025-12-24T16:42:16.535278+00:00 [running]> on host ee1c68d23d24
+[2025-12-24T16:42:20.954+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ml_retrain_pipeline' AIRFLOW_CTX_TASK_ID='notify_success' AIRFLOW_CTX_EXECUTION_DATE='2025-12-24T16:42:16.535278+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-24T16:42:16.535278+00:00'
+[2025-12-24T16:42:20.954+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-12-24T16:42:20.989+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/utils/email.py:155 RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+[2025-12-24T16:42:20.989+0000] {email.py:272} INFO - Email alerting: attempt 1
+[2025-12-24T16:42:22.626+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/email.py", line 79, in execute
+    send_email(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+           ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 155, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 282, in send_mime_email
+    smtp_conn.login(smtp_user, smtp_password)
+  File "/usr/local/lib/python3.12/smtplib.py", line 750, in login
+    raise last_exception
+  File "/usr/local/lib/python3.12/smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+                   ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-88d9aa363e3sm131660076d6.57 - gsmtp')
+[2025-12-24T16:42:22.640+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=ml_retrain_pipeline, task_id=notify_success, run_id=manual__2025-12-24T16:42:16.535278+00:00, execution_date=20251224T164216, start_date=20251224T164220, end_date=20251224T164222
+[2025-12-24T16:42:22.662+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-12-24T16:42:22.663+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 11 for task notify_success ((535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-88d9aa363e3sm131660076d6.57 - gsmtp'); 326)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 422, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/email.py", line 79, in execute
+    send_email(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+           ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 155, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/email.py", line 282, in send_mime_email
+    smtp_conn.login(smtp_user, smtp_password)
+  File "/usr/local/lib/python3.12/smtplib.py", line 750, in login
+    raise last_exception
+  File "/usr/local/lib/python3.12/smtplib.py", line 739, in login
+    (code, resp) = self.auth(
+                   ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/smtplib.py", line 662, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-88d9aa363e3sm131660076d6.57 - gsmtp')
+[2025-12-24T16:42:22.693+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-12-24T16:42:22.715+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-24T16:42:22.717+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
